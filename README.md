@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ochabuloq Savdo — veb-sayt
 
-## Getting Started
+Samarqand viloyati, Qo'shrabot tumanidagi "Ochabuloq Savdo" savdo majmuasi sayti.
+Figma dizayni asosida **Next.js 16 (App Router) + Tailwind CSS v4** bilan yozilgan.
 
-First, run the development server:
+Figma: `Admin Panel (WMS PDA)` → "Ochabuloq" sahifasi.
+
+## Ishga tushirish
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # Telegram bot ma'lumotlarini kiriting
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production: `npm run build && npm start`. Vercel'ga to'g'ridan-to'g'ri deploy qilsa bo'ladi
+(env o'zgaruvchilarini Vercel sozlamalariga qo'shing).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Sahifalar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Yo'l | Figma |
+|---|---|
+| `/` | 01 · Bosh sahifa (Hero, galereya lentasi, Biz haqimizda, Yo'nalishlar, Statistika, Aloqa) |
+| `/xizmatlar` | 02 · Xizmatlar |
+| `/oziq-ovqat-dokoni` | 03 · Oziq-ovqat do'koni |
+| `/xojalik-mollari` | 04 · Xo'jalik mollari |
+| `/sartaroshxona` | 05 · Sartaroshxona |
+| `/galereya` | Gallery page grid (filtr + lightbox) |
+| `/gosht-mahsulotlari` | M03 · Go'sht mahsulotlari (buyurtma formasi) |
+| boshqa har qanday yo'l | 07 · 404 |
 
-## Learn More
+Quyuq / oq tema: navbar'dagi tugma, tanlov `localStorage`da saqlanadi. Hero va footer har doim quyuq.
 
-To learn more about Next.js, take a look at the following resources:
+## Telegram bot
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Aloqa formasi (`/api/contact`) va buyurtma formasi (`/api/order`) xabarlarni Telegram botga yuboradi:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. [@BotFather](https://t.me/BotFather) orqali bot yarating → `TELEGRAM_BOT_TOKEN`
+2. Botni kerakli guruh/kanalga qo'shing, chat ID sini oling → `TELEGRAM_CHAT_ID`
+3. `.env.local` ga yozing. Env bo'lmasa, dev rejimida xabar konsolga chiqadi.
 
-## Deploy on Vercel
+## Rasmlar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`public/images/` ichidagi barcha `.jpg` fayllar **vaqtinchalik placeholder** (Figma'dan rasmlarni
+avtomatik yuklab bo'lmadi). Figma'dan eksport qilib, xuddi shu nomlar bilan almashtiring:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Papka | Fayllar | Figma manbasi |
+|---|---|---|
+| `hero/` | `majmua.jpg` (1920×1080) | Hero / Desktop → "photo" qatlami |
+| `home/` | `1.jpg … 7.jpg` | Gallery strip / Category=Bosh sahifa |
+| `oziq-ovqat/` | `1.jpg … 8.jpg` | Gallery strip / Category=Mini market |
+| `xojalik/` | `1.jpg … 9.jpg` | Gallery strip / Category=Xo'jalik mollari |
+| `sartaroshxona/` | `1.jpg … 5.jpg` | Gallery strip / Category=Sartaroshona |
+| `directions/` | `oziq-ovqat.jpg`, `xojalik.jpg`, `sartaroshxona.jpg` | Direction card → "card-img" |
+| `gosht/` | `mol.jpg`, `qoy.jpg`, `tovuq.jpg` | M03 → "Mahsulot rasmi" |
+| `gallery/` | `1.jpg … 12.jpg` | Gallery page grid |
+| `map/` | `map.jpg` | Contact → xarita (yoki Google Maps iframe bilan almashtiring) |
+
+Rasm tartibi va nisbatlari `src/lib/site.ts` dagi `galleryWidths` massivlarida (Figma'dagi kenglik, 320px balandlikda).
+
+## Tuzilma
+
+```
+src/
+  app/            sahifalar, API route'lar, globals.css (tokenlar)
+  components/     Navbar, Footer, StickyBar, Lightbox, sections/*, ui/*
+  lib/site.ts     matnlar, kontaktlar, yo'nalishlar, galereya
+  lib/telegram.ts Telegram yuborish + rate limit
+  fonts/          Inter (variable, o'z-o'zidan host qilingan)
+```
+
+Dizayn tokenlari `globals.css` da CSS o'zgaruvchilar sifatida (`--bg-canvas`, `--text-primary` …),
+Tailwind'da `bg-canvas`, `text-fg-primary`, `border-line` kabi nomlar bilan ishlatiladi.
+Matn uslublari: `t-display-lg`, `t-md-semibold`, `t-eyebrow` va h.k.
+
+Kontaktlar (telefon, Telegram, Instagram, email, manzil) — `src/lib/site.ts` da.

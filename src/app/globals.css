@@ -1,26 +1,275 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   Ochabuloq Savdo — semantic tokens (Figma: Ochabuloq / 2. Semantic)
+   Light values are the default; [data-theme="dark"] switches them.
+   Hero and Footer are always-dark bands (.dark-band).
+------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-canvas: #ffffff;
+  --bg-surface: #f0f1f4;
+  --bg-surface-secondary: #e4e6eb;
+  --bg-hover: #e4e6eb;
+  --bg-disabled: #e4e6eb;
+  --bg-brand: #2547f4;
+  --bg-brand-hover: #1c3ad6;
+  --bg-brand-subtle: #f0f2ff;
+  --bg-success-subtle: #e6f6ee;
+  --bg-error-subtle: #fdecea;
+
+  --text-primary: #111318;
+  --text-secondary: #414653;
+  --text-tertiary: #575c6b;
+  --text-placeholder: #717684;
+  --text-disabled: #9a9fac;
+  --text-brand: #0e30dd;
+  --text-on-brand: #ffffff;
+  --text-success: #1a7a4a;
+  --text-error: #b3261e;
+
+  --icon-default: #414653;
+  --icon-subtle: #717684;
+  --icon-brand: #2547f4;
+
+  --border-default: #9a9fac;
+  --border-strong: #717684;
+  --border-subtle: #e4e6eb;
+  --border-brand: #2547f4;
+  --border-error: #ec8179;
+  --status-success-border: #7ecea8;
+  --status-error-border: #ec8179;
+
+  --shadow-brand-glow: 0 6px 20px -4px rgba(14, 165, 233, 0.35);
+  --shadow-lg: 0 4px 6px -2px rgba(0, 0, 0, 0.2), 0 12px 16px -4px rgba(0, 0, 0, 0.34);
+
+  --overlay: rgba(5, 5, 8, 0.92);
+  color-scheme: light;
+}
+
+[data-theme="dark"],
+.dark-band {
+  --bg-canvas: #111318;
+  --bg-surface: #1c1e26;
+  --bg-surface-secondary: #2c2f3a;
+  --bg-hover: #2c2f3a;
+  --bg-disabled: #2c2f3a;
+  --bg-brand: #415ff6;
+  --bg-brand-hover: #627bf9;
+  --bg-brand-subtle: #0d2082;
+  --bg-success-subtle: #163b2a;
+  --bg-error-subtle: #5a1b16;
+
+  --text-primary: #f0f1f4;
+  --text-secondary: #ced1d9;
+  --text-tertiary: #9a9fac;
+  --text-placeholder: #717684;
+  --text-disabled: #414653;
+  --text-brand: #92a3fc;
+  --text-on-brand: #ffffff;
+  --text-success: #7ecea8;
+  --text-error: #ec8179;
+
+  --icon-default: #9a9fac;
+  --icon-subtle: #575c6b;
+  --icon-brand: #627bf9;
+
+  --border-default: #575c6b;
+  --border-strong: #717684;
+  --border-subtle: #1c1e26;
+  --border-brand: #627bf9;
+  --border-error: #ec8179;
+  --status-success-border: #206f4a;
+  --status-error-border: #a5261d;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), Inter, ui-sans-serif, system-ui, sans-serif;
+
+  --color-canvas: var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-surface-secondary: var(--bg-surface-secondary);
+  --color-hover: var(--bg-hover);
+  --color-disabled: var(--bg-disabled);
+  --color-brand: var(--bg-brand);
+  --color-brand-hover: var(--bg-brand-hover);
+  --color-brand-subtle: var(--bg-brand-subtle);
+  --color-success-subtle: var(--bg-success-subtle);
+  --color-error-subtle: var(--bg-error-subtle);
+
+  --color-fg-primary: var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-tertiary: var(--text-tertiary);
+  --color-fg-placeholder: var(--text-placeholder);
+  --color-fg-disabled: var(--text-disabled);
+  --color-fg-brand: var(--text-brand);
+  --color-fg-on-brand: var(--text-on-brand);
+  --color-fg-success: var(--text-success);
+  --color-fg-error: var(--text-error);
+
+  --color-icon: var(--icon-default);
+  --color-icon-subtle: var(--icon-subtle);
+  --color-icon-brand: var(--icon-brand);
+
+  --color-line: var(--border-default);
+  --color-line-strong: var(--border-strong);
+  --color-line-subtle: var(--border-subtle);
+  --color-line-brand: var(--border-brand);
+  --color-line-error: var(--border-error);
+  --color-line-success-status: var(--status-success-border);
+  --color-line-error-status: var(--status-error-border);
+
+  --shadow-brand-glow: var(--shadow-brand-glow);
+  --shadow-card: var(--shadow-lg);
+
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+/* ---------- Typography (Figma text styles) ---------- */
+@utility t-display-2xl {
+  font-size: 56px;
+  line-height: 67px;
+  font-weight: 600;
+  letter-spacing: -0.84px;
+}
+@utility t-display-xl {
+  font-size: 48px;
+  line-height: 58px;
+  font-weight: 400;
+  letter-spacing: -0.72px;
+}
+@utility t-display-lg {
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+}
+@utility t-display-md {
+  font-size: 36px;
+  line-height: 43px;
+  font-weight: 400;
+  letter-spacing: -0.36px;
+}
+@utility t-display-md-semibold {
+  font-size: 36px;
+  line-height: 43px;
+  font-weight: 600;
+  letter-spacing: -0.36px;
+}
+@utility t-display-sm {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+}
+@utility t-xl {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+}
+@utility t-xl-semibold {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 600;
+}
+@utility t-lg-semibold {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 600;
+}
+@utility t-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+@utility t-md-medium {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+@utility t-md-semibold {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+@utility t-sm {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+}
+@utility t-sm-medium {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 500;
+}
+@utility t-sm-semibold {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 600;
+}
+@utility t-eyebrow {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.96px;
+  text-transform: uppercase;
+}
+
+/* Section heading: 28/400 on mobile → 40/400 on desktop */
+@utility t-section-heading {
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 400;
+  letter-spacing: -0.28px;
+  @media (width >= 1024px) {
+    font-size: 40px;
+    line-height: 48px;
+    letter-spacing: -0.4px;
+  }
+}
+
+/* Page-level gutters: 20px mobile → 80px desktop, content max 1280 */
+@utility container-page {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (width >= 1024px) {
+    padding-inline: 80px;
+  }
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--border-brand);
+    outline-offset: 2px;
+  }
+}
+
+/* Safe-area for the mobile sticky bar */
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
