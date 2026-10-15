@@ -16,7 +16,6 @@ const overview = [
   { icon: "shopping-cart", title: "Oziq-ovqat do'koni", description: directions[0].shortDescription, href: "/oziq-ovqat-dokoni" },
   { icon: "home", title: "Xo'jalik mollari", description: directions[1].shortDescription, href: "/xojalik-mollari" },
   { icon: "scissors", title: "Sartaroshxona", description: directions[2].shortDescription, href: "/sartaroshxona" },
-  { icon: "shield", title: "Go'sht mahsulotlari", description: "Sertifikatlangan va halol go'sht — buyurtma bilan, har doim yangi.", href: "/gosht-mahsulotlari" },
 ];
 
 export default function ServicesPage() {

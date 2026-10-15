@@ -60,13 +60,6 @@ export const directions = [
         description:
           "Har kuni issiq pishirilgan non, kulcha va turli pishiriqlar.",
       },
-      {
-        icon: "shield",
-        title: "Go'sht mahsulotlari",
-        description:
-          "Sertifikatlangan va halol go'sht — har doim yangi va ishonchli.",
-        href: "/gosht-mahsulotlari",
-      },
     ],
   },
   {
