@@ -1,11 +1,12 @@
 export const site = {
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://webwww.vercel.app").replace(/\/$/, ""),
   name: "Ochabuloq Savdo",
   description:
     "Oziq-ovqat, xo'jalik mollari va zamonaviy sartaroshxona — sifat va ishonch bir manzilda. Samarqand viloyati, Qo'shrabot tumani, Ochabuloq MFY.",
-  phoneDisplay: "+998 (99) 123-45-67",
-  phoneHref: "tel:+998991234567",
-  telegramHref: "https://t.me/ochabuloqsavdo",
-  instagramHref: "https://instagram.com/ochabuloqsavdo",
+  phoneDisplay: "+998 (97) 878-07-78",
+  phoneHref: "tel:+998978780778",
+  telegramHref: "https://t.me/ochabuloq_savdo",
+  instagramHref: "https://instagram.com/_suxrob.0066",
   email: "info@ochabuloq.uz",
   address: "Samarqand viloyati, Qo'shrabot tumani, Ochabuloq MFY",
   addressShort: "Qo'shrabot tumani, Ochabuloq MFY",

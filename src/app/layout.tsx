@@ -17,7 +17,9 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://ochabuloq.uz"),
+  metadataBase: new URL(site.url),
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  robots: { index: true, follow: true },
   title: {
     default: `${site.name} — savdo majmuasi`,
     template: `%s — ${site.name}`,
