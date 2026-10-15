@@ -27,6 +27,8 @@ export const navLinks: { key: NavKey; label: string; href: string }[] = [
 export const directions = [
   {
     slug: "oziq-ovqat-dokoni",
+    phoneDisplay: "+998 (93) 236-13-45",
+    phoneHref: "tel:+998932361345",
     title: "Oziq-ovqat do'koni",
     badge: "OZIQ-OVQAT",
     icon: "shopping-cart",
@@ -69,6 +71,8 @@ export const directions = [
   },
   {
     slug: "xojalik-mollari",
+    phoneDisplay: "+998 (88) 911-77-88",
+    phoneHref: "tel:+998889117788",
     title: "Xo'jalik mollari",
     badge: "XO'JALIK MOLLARI",
     icon: "home",
@@ -111,6 +115,8 @@ export const directions = [
   },
   {
     slug: "sartaroshxona",
+    phoneDisplay: "+998 (94) 670-50-37",
+    phoneHref: "tel:+998946705037",
     title: "Sartaroshxona",
     badge: "SARTAROSHXONA",
     icon: "scissors",

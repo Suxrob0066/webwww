@@ -33,7 +33,7 @@ export default async function DirectionPage({ params }: { params: Promise<Params
       <GalleryStrip photos={buildStrip(d.galleryFolder, d.galleryWidths, d.title)} />
       <ServicesGrid items={d.services} />
       <WhyChooseUs />
-      <Contact />
+      <Contact phone={{ display: d.phoneDisplay, href: d.phoneHref }} />
     </Shell>
   );
 }

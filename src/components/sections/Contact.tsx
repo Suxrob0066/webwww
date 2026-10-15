@@ -5,21 +5,27 @@ import { Button } from "../ui/Button";
 import { SectionHeader } from "./PageHero";
 import { ContactForm } from "./ContactForm";
 
-const info: { icon: IconName; label: string; value: string; valueMobile?: string; href?: string; desktopOnly?: boolean }[] = [
-  { icon: "map-pin", label: "Manzil", value: site.address, valueMobile: site.addressShort, href: site.mapsHref },
-  { icon: "clock", label: "Ish vaqti", value: site.hours },
-  { icon: "phone", label: "Telefon", value: site.phoneDisplay, href: site.phoneHref },
-  { icon: "mail", label: "Email", value: site.email, href: `mailto:${site.email}`, desktopOnly: true },
-];
+type InfoRow = { icon: IconName; label: string; value: string; valueMobile?: string; href?: string; desktopOnly?: boolean };
+
+/** Optional per-direction phone; defaults to the main number. */
+type ContactPhone = { display: string; href: string };
 
 /** Contact section (Figma 344:103 / 366:2967). Mobile order: header → quick actions → info → map → form. */
-export function Contact() {
+export function Contact({ phone }: { phone?: ContactPhone } = {}) {
+  const phoneDisplay = phone?.display ?? site.phoneDisplay;
+  const phoneHref = phone?.href ?? site.phoneHref;
+  const info: InfoRow[] = [
+    { icon: "map-pin", label: "Manzil", value: site.address, valueMobile: site.addressShort, href: site.mapsHref },
+    { icon: "clock", label: "Ish vaqti", value: site.hours },
+    { icon: "phone", label: "Telefon", value: phoneDisplay, href: phoneHref },
+    { icon: "mail", label: "Email", value: site.email, href: `mailto:${site.email}`, desktopOnly: true },
+  ];
   const quickActions = (
     <div className="flex flex-col gap-3 lg:flex-row lg:pt-2">
       <Button size="lg" href={site.telegramHref} className="w-full lg:w-auto">
         Telegramda yozish
       </Button>
-      <Button size="lg" hierarchy="secondary" href={site.phoneHref} className="w-full lg:w-auto">
+      <Button size="lg" hierarchy="secondary" href={phoneHref} className="w-full lg:w-auto">
         Qo&apos;ng&apos;iroq qilish
       </Button>
     </div>
